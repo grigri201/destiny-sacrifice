@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0cf0riae7ynt"]
+
+[ext_resource type="PackedScene" uid="uid://bif26vwpgpb0d" path="res://ui/hero_container/hero_container.tscn" id="1_imkys"]
+
+[node name="BattleUi" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 0
+
+[node name="HeroContainer2" parent="HBoxContainer" instance=ExtResource("1_imkys")]
+layout_mode = 2
+
+[node name="HeroContainer3" parent="HBoxContainer" instance=ExtResource("1_imkys")]
+layout_mode = 2
+
+[node name="HeroContainer4" parent="HBoxContainer" instance=ExtResource("1_imkys")]
+layout_mode = 2
+
+[node name="HeroContainer" parent="HBoxContainer" instance=ExtResource("1_imkys")]
+layout_mode = 2
