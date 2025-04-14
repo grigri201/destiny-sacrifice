@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgi7vv2yxff16"]
+[gd_scene load_steps=7 format=3 uid="uid://cgi7vv2yxff16"]
 
-[ext_resource type="Texture2D" uid="uid://ciavp87sc8l5x" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 01 Mage/Hero01 Mage Idle-Sheet.png" id="1_wlkkd"]
-[ext_resource type="Texture2D" uid="uid://knpagiur63ag" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 02 Archer/Hero02 Archer Atk-Sheet.png" id="2_p8et5"]
-[ext_resource type="Texture2D" uid="uid://dejoma0e26lkt" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 02 Archer/Hero02 Archer Idle-Sheet.png" id="3_p8et5"]
+[ext_resource type="Texture2D" uid="uid://geniubftwwoy" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 02 Archer/32x32/Hero02 Archer Atk-Sheet2x.png" id="2_p8et5"]
+[ext_resource type="Texture2D" uid="uid://bow2btq3jm038" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 02 Archer/32x32/Hero02 Archer Idle-Sheet2x.png" id="3_p8et5"]
 
 [sub_resource type="Animation" id="Animation_6vvi0"]
 length = 0.001
@@ -16,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_wlkkd")]
+"values": [ExtResource("3_p8et5")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -136,7 +135,7 @@ _data = {
 [node name="Archer" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_wlkkd")
+texture = ExtResource("3_p8et5")
 hframes = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

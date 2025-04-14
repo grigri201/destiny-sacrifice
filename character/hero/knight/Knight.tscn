@@ -1,49 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2ehdlhvy1de4"]
+[gd_scene load_steps=9 format=3 uid="uid://d2ehdlhvy1de4"]
 
-[ext_resource type="Texture2D" uid="uid://bbcv76lk2mwtm" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 03 Knight/Hero03 Knight Idle-Sheet.png" id="1_hpkq0"]
-[ext_resource type="Texture2D" uid="uid://kt7ednl4rfg3" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 03 Knight/Hero03 Knight Atk-Sheet.png" id="2_x86oe"]
-
-[sub_resource type="Animation" id="Animation_hpkq0"]
-resource_name = "idle"
-length = 2.4
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_hpkq0")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [12]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-}
+[ext_resource type="Texture2D" uid="uid://3iklrp65jhj6" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 03 Knight/32x32/Hero03 Knight Idle-Sheet2x.png" id="1_hpkq0"]
+[ext_resource type="Script" uid="uid://bxkmesef7heco" path="res://character/hero/hero.gd" id="1_m6wob"]
+[ext_resource type="Texture2D" uid="uid://ckl7bcua75gts" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 03 Knight/32x32/Hero03 Knight Atk-Sheet2x.png" id="2_x86oe"]
 
 [sub_resource type="Animation" id="Animation_x86oe"]
 length = 0.001
@@ -125,6 +84,48 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_hpkq0"]
+resource_name = "idle"
+length = 2.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_hpkq0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_60iqq"]
 _data = {
 &"RESET": SubResource("Animation_x86oe"),
@@ -132,7 +133,12 @@ _data = {
 &"idle": SubResource("Animation_hpkq0")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6wob"]
+size = Vector2(32, 32)
+
 [node name="Knight" type="Node2D"]
+script = ExtResource("1_m6wob")
+attack_move_duration = 0.1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_hpkq0")
@@ -142,3 +148,10 @@ hframes = 12
 libraries = {
 &"": SubResource("AnimationLibrary_60iqq")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_m6wob")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
