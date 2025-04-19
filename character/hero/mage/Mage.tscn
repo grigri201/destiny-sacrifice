@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc0s7nsgeq7c4"]
+[gd_scene load_steps=11 format=3 uid="uid://dc0s7nsgeq7c4"]
 
 [ext_resource type="Texture2D" uid="uid://c2jnoiucylf8b" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 01 Mage/32x32/Hero01 Mage Idle2x-Sheet.png" id="1_ko6ke"]
+[ext_resource type="Script" uid="uid://bxkmesef7heco" path="res://character/hero/hero.gd" id="1_x7c1p"]
 [ext_resource type="Texture2D" uid="uid://d3bovvckr7m1u" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 01 Mage/32x32/Hero01 Mage Atk2x-Sheet.png" id="2_3iej3"]
+[ext_resource type="Resource" uid="uid://btadeb7aqdbpi" path="res://global/resource/hero/mage.tres" id="2_6gi2t"]
+[ext_resource type="Theme" uid="uid://de5knj4bua7mn" path="res://theme/ui_font.tres" id="3_aeh0c"]
 
 [sub_resource type="Animation" id="Animation_6vvi0"]
 length = 0.001
@@ -132,7 +135,12 @@ _data = {
 &"idle": SubResource("Animation_3iej3")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7c1p"]
+size = Vector2(32, 32)
+
 [node name="Mage" type="Node2D"]
+script = ExtResource("1_x7c1p")
+character_resource = ExtResource("2_6gi2t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ko6ke")
@@ -142,3 +150,42 @@ hframes = 12
 libraries = {
 &"": SubResource("AnimationLibrary_cqs88")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_x7c1p")
+
+[node name="AttackLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = 9.0
+offset_right = -3.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_aeh0c")
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = 9.0
+offset_right = 25.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_aeh0c")
+text = "999"
+horizontal_alignment = 1
+vertical_alignment = 1

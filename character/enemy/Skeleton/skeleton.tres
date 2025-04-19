@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyResource" load_steps=2 format=3 uid="uid://2fhgu4y222gi"]
+
+[ext_resource type="Script" uid="uid://b6whsoyr1pxpy" path="res://character/enemy/enemy_resource.gd" id="1_tpnin"]
+
+[resource]
+script = ExtResource("1_tpnin")
+loot_level = 1
+name = "s1"
+character_class = "skeleton"
+type = "enemy"
+attack = 2
+HP = 2
+metadata/_custom_type_script = "uid://brvh42sjbp4qh"

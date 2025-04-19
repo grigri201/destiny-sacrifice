@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://be4308m1xxk4o"]
+
+[ext_resource type="Script" uid="uid://b36c6p36rcy2v" path="res://scene/combat_scene/slot/team.gd" id="1_mqmpi"]
+[ext_resource type="PackedScene" uid="uid://cruxenbvwvnpn" path="res://scene/combat_scene/slot/slot.tscn" id="2_nnilt"]
+
+[node name="Team" type="Node2D"]
+script = ExtResource("1_mqmpi")
+slot_prefab = ExtResource("2_nnilt")

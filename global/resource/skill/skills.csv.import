@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://duvv7qayveql7"
+
+[deps]
+
+files=["res://global/resource/skill/skills.name.translation", "res://global/resource/skill/skills.description.translation", "res://global/resource/skill/skills.unlock.translation"]
+
+source_file="res://global/resource/skill/skills.csv"
+dest_files=["res://global/resource/skill/skills.name.translation", "res://global/resource/skill/skills.description.translation", "res://global/resource/skill/skills.unlock.translation"]
+
+[params]
+
+compress=true
+delimiter=0

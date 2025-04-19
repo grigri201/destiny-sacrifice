@@ -1,0 +1,3 @@
+key,name,description,unlock_level
+bloodthirsty,Bloodthirsty,每次受到伤害时永久增加{card_level}点攻击力,1
+warcry,Warcry,增加全体队友{card_level*2}点攻击力,1

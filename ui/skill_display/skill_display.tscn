@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dinx3muvs1cbb"]
+
+[ext_resource type="Script" uid="uid://ctlo83jr24hm1" path="res://ui/skill_display/skill_display.gd" id="1_suuuk"]
+
+[node name="SkillDisplay" type="Label"]
+mouse_filter = 1
+text = "测试用的技能"
+script = ExtResource("1_suuuk")

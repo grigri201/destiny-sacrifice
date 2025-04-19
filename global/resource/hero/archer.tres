@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HeroResource" load_steps=2 format=3 uid="uid://4mb8yxkonil4"]
+
+[ext_resource type="Script" uid="uid://b7thdb10bue3t" path="res://global/resource/hero/hero_resource.gd" id="1_ltmp6"]
+
+[resource]
+script = ExtResource("1_ltmp6")
+level = 1
+name = "Alice"
+character_class = "archer"
+type = "hero"
+attack = 3
+HP = 5
+metadata/_custom_type_script = "uid://brvh42sjbp4qh"

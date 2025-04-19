@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c42j4gewwbg6v"]
+
+[ext_resource type="Texture2D" uid="uid://3iklrp65jhj6" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 03 Knight/32x32/Hero03 Knight Idle-Sheet2x.png" id="1_wgfmq"]
+
+[resource]
+atlas = ExtResource("1_wgfmq")
+region = Rect2(0, 0, 32, 40)
