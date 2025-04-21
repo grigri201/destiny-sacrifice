@@ -37,7 +37,6 @@ func _load_skills():
 			printerr("Duplicate skill_resource key found: ", skill_resource.key, " in ", SKILL_CSV_PATH)
 		else:
 			skill_map[skill_resource.key] = skill_resource
-
 	file.close()
 
 func get_skill(key: String) -> SkillResource:

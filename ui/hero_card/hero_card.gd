@@ -2,9 +2,10 @@ extends Control
 class_name HeroCard
 
 # Preload the SkillDisplay scene (adjust path if needed)
-const SkillDisplayScene = preload("res://ui/skill_display/skill_display.tscn")
+const SKILL_DISPLAY_SCENE = preload("res://ui/skill_display/skill_display.tscn")
+const HERO_RESOURCE = preload("res://global/resource/hero/hero_resource.gd")
 
-@export var character_resource: CharacterResource : set = set_character_resource
+@export var character_resource: CharacterResource: set = set_character_resource
 
 @onready var hero_photo: TextureRect = %HeroPhoto
 @onready var hero_name: Label = %HeroName
@@ -12,6 +13,10 @@ const SkillDisplayScene = preload("res://ui/skill_display/skill_display.tscn")
 @onready var hp_label: Label = %HPLabel
 @onready var skill_container: VBoxContainer = %SkillContainer
 
+func _ready():
+	# Test: Create a random hero card
+	var random_hero = HERO_RESOURCE.create_random_hero()
+	set_character_resource(random_hero)
 
 func set_character_resource(new_resource: CharacterResource):
 	# Disconnect signals from the old resource if it exists and is valid
@@ -50,11 +55,11 @@ func update_card():
 		await ready # Ensure nodes are ready before accessing them
 
 	if character_resource:
-		hero_name.text = character_resource.name if character_resource.has("name") else "N/A"
-		attack_label.text = str(character_resource.attack) if character_resource.has("attack") else "N/A"
-		hp_label.text = str(character_resource.HP) if character_resource.has("HP") else "N/A"
+		hero_name.text = character_resource.name if character_resource.name else "N/A"
+		attack_label.text = str(character_resource.attack) if character_resource.attack else "N/A"
+		hp_label.text = str(character_resource.HP) if character_resource.HP else "N/A"
 		
-		if character_resource.has("photo") and character_resource.photo: # Check if photo property exists and is not null
+		if character_resource.photo: # Check if photo is not null
 			hero_photo.texture = character_resource.photo
 		else:
 			hero_photo.texture = null # Or set a default placeholder texture
@@ -65,15 +70,15 @@ func update_card():
 			child.queue_free()
 
 		# Add new skills if the scene is loaded and the resource has skills
-		if SkillDisplayScene and character_resource.has("skills"):
+		if SKILL_DISPLAY_SCENE and character_resource.skills:
 			for skill_resource in character_resource.skills: # Assuming character_resource.skills is an array
-				var skill_display = SkillDisplayScene.instantiate()
+				var skill_display = SKILL_DISPLAY_SCENE.instantiate()
 				skill_container.add_child(skill_display)
 				if skill_display.has_method("set_skill_resource"):
 					skill_display.set_skill_resource(skill_resource)
 				else:
-					printerr("SkillDisplay scene at %s does not have set_skill_resource method." % SkillDisplayScene.resource_path)
-		elif not SkillDisplayScene:
+					printerr("SkillDisplay scene at %s does not have set_skill_resource method." % SKILL_DISPLAY_SCENE.resource_path)
+		elif not SKILL_DISPLAY_SCENE:
 			printerr("SkillDisplay scene could not be preloaded. Check the path.")
 
 	else:
@@ -85,4 +90,3 @@ func update_card():
 		# Clear skills if no resource
 		for child in skill_container.get_children():
 			child.queue_free()
-
