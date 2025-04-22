@@ -1,6 +1,7 @@
 extends Node
 
 const SKILL_CSV_PATH = "res://global/resource/skill/skills.csv"
+const skill_resource: Script = preload("res://global/resource/skill/skill_resource.gd")
 var skill_map: Dictionary = {}
 
 func _ready():
@@ -23,23 +24,23 @@ func _load_skills():
 			printerr("Skipping invalid row in ", SKILL_CSV_PATH, ": ", data)
 			continue
 
-		var skill_resource = SkillResource.new()
-		skill_resource.key = data[0].strip_edges()
-		skill_resource.name = data[1].strip_edges()
-		skill_resource.description = data[2].strip_edges()
+		var skill = skill_resource.new()
+		skill.key = data[0].strip_edges()
+		skill.name = data[1].strip_edges()
+		skill.description = data[2].strip_edges()
 		if data[3].strip_edges().is_valid_int():
-			skill_resource.unlock_level = int(data[3].strip_edges())
+			skill.unlock_level = int(data[3].strip_edges())
 		else:
-			printerr("Invalid unlock_level '", data[3], "' for skill_resource '", skill_resource.key, "' in ", SKILL_CSV_PATH)
-			skill_resource.unlock_level = 0 # Or handle the error as needed
+			printerr("Invalid unlock_level '", data[3], "' for skill_resource '", skill.key, "' in ", SKILL_CSV_PATH)
+			skill.unlock_level = 0 # Or handle the error as needed
 
-		if skill_map.has(skill_resource.key):
-			printerr("Duplicate skill_resource key found: ", skill_resource.key, " in ", SKILL_CSV_PATH)
+		if skill_map.has(skill.key):
+			printerr("Duplicate skill_resource key found: ", skill.key, " in ", SKILL_CSV_PATH)
 		else:
-			skill_map[skill_resource.key] = skill_resource
+			skill_map[skill.key] = skill
 	file.close()
 
-func get_skill(key: String) -> SkillResource:
+func get_skill(key: String) -> skill_resource:
 	return skill_map.get(key)
 
 # Optional: Function to get all skills

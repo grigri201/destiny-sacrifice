@@ -1,14 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://8cyrfxkufpsq"]
+[gd_scene load_steps=6 format=3 uid="uid://8cyrfxkufpsq"]
 
-[ext_resource type="Script" uid="uid://bjnrvy8xpfk13" path="res://manager/combat_manager/combat_manager.gd" id="1_nf1kr"]
+[ext_resource type="Script" uid="uid://bjnrvy8xpfk13" path="res://scene/combat_scene/combat_manager/combat_manager.gd" id="1_nf1kr"]
 [ext_resource type="Script" uid="uid://b7thdb10bue3t" path="res://global/resource/hero/hero_resource.gd" id="2_stflw"]
 [ext_resource type="Resource" uid="uid://cscq0jfpx5cv1" path="res://global/resource/hero/knight.tres" id="3_qa6lf"]
-[ext_resource type="Script" uid="uid://b6whsoyr1pxpy" path="res://character/enemy/enemy_resource.gd" id="3_ube87"]
 [ext_resource type="Resource" uid="uid://btadeb7aqdbpi" path="res://global/resource/hero/mage.tres" id="4_ggt2e"]
 [ext_resource type="Resource" uid="uid://4mb8yxkonil4" path="res://global/resource/hero/archer.tres" id="5_c6uyl"]
-[ext_resource type="Resource" uid="uid://2fhgu4y222gi" path="res://character/enemy/skeleton/skeleton.tres" id="7_ggt2e"]
 
 [node name="CombatManager" type="Node"]
 script = ExtResource("1_nf1kr")
 hero_list = Array[ExtResource("2_stflw")]([ExtResource("3_qa6lf"), ExtResource("4_ggt2e"), ExtResource("5_c6uyl")])
-enemy_list = Array[ExtResource("3_ube87")]([ExtResource("7_ggt2e"), ExtResource("7_ggt2e"), ExtResource("7_ggt2e"), ExtResource("7_ggt2e"), ExtResource("7_ggt2e")])

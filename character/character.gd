@@ -16,7 +16,7 @@ const ATTACK_ANIMATION_NAME: String = "attack"
 
 var is_attacking: bool = false # Flag to prevent concurrent attacks
 
-static func fromResource(resource: CharacterResource) -> Character:
+static func from_resource(resource: CharacterResource) -> Character:
 	var character = load("res://character/"+resource.type+"/"+resource.character_class+"/"+resource.character_class+".tscn").instantiate()
 	return character as Character
 

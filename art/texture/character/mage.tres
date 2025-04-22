@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://ogohqgbaqf5u"]
+
+[ext_resource type="Texture2D" uid="uid://c2jnoiucylf8b" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 01 Mage/32x32/Hero01 Mage Idle2x-Sheet.png" id="1_uc5ho"]
+
+[resource]
+atlas = ExtResource("1_uc5ho")
+region = Rect2(0, 0, 32, 40)

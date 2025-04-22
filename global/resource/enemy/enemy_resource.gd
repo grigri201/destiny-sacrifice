@@ -1,6 +1,6 @@
 extends CharacterResource
-class_name HeroResource
+class_name EnemyResource
 
-@export var level: int = 1 # 假设 level 也有默认值
+@export var loot_level: int = 1
 @export_group("Skills")
 @export var skills: Array = [] # Will store skill resources

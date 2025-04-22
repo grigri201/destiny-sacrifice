@@ -15,5 +15,5 @@ signal before_hurt(source: Character, opponent: Character)
 signal after_hurt(source: Character, opponent: Character)
 
 # 角色
-signal character_died(character: HERO_RESOURCE)
-signal character_level_up(character: HERO_RESOURCE)
+signal character_died(character: CharacterResource)
+signal character_level_up(character: CharacterResource)

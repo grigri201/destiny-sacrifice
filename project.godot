@@ -18,7 +18,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 EventBus="*res://global/event_bus.gd"
+ResourceManager="*res://global/resource_manager/resource_manager.gd"
 SkillMap="*res://global/skill_map.gd"
+SceneManager="*res://global/scene_manager/scene_manager.gd"
+EnemyMap="*res://global/enemy_map.gd"
 
 [display]
 

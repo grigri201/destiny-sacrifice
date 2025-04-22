@@ -4,7 +4,7 @@ class_name CombatManager
 @onready var hero_team: Team
 @onready var enemy_team: Team
 
-@export var hero_list: Array[HERO_RESOURCE] = []
+@export var hero_list: Array[HeroResource] = []
 @export var enemy_list: Array[EnemyResource] = []
 
 var hero_index: int = 0
@@ -28,7 +28,7 @@ func init():
 		if slot:
 			_init_characters(enemy, slot, enemy_team)
 
-func add_hero(hero: HERO_RESOURCE):
+func add_hero(hero: HeroResource):
 	hero_list.append(hero)
 
 func add_enemy(enemy: EnemyResource):
@@ -37,7 +37,7 @@ func add_enemy(enemy: EnemyResource):
 func start_battle():
 	EventBus.battle_started.emit()
 
-func remove_hero(hero: HERO_RESOURCE):
+func remove_hero(hero: HeroResource):
 	hero_list.erase(hero)
 
 func remove_enemy(enemy: EnemyResource):
@@ -67,7 +67,7 @@ func next_enemy():
 		return next_enemy()
 
 func _init_characters(res: CharacterResource, slot: Slot, team: Team):
-	var character = Character.fromResource(res)
+	var character = Character.from_resource(res)
 	slot.character = character
 	character.position = slot.position
 	character.set_character_resource(res)
