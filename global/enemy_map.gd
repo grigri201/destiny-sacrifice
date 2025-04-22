@@ -17,24 +17,49 @@ func _load_enemies_from_csv():
 		printerr("Failed to open enemy CSV file. Error code: ", FileAccess.get_open_error())
 		return
 
+	# Adding log before reading header
+	print("Starting to load enemies from: ", ENEMY_CSV_PATH)
+
 	# Skip header line
 	var header = file.get_csv_line()
 	if header.is_empty():
-		printerr("CSV header is empty.")
+		printerr("CSV header is empty in: ", ENEMY_CSV_PATH)
 		file.close()
 		return
-		
-	# Assuming header order: name,character_class,type,attack,hp,skills,loot_level
-	# In a real scenario, validating header names against expected columns is safer
-	var column_count = header.size()
 
+	var column_count = header.size()
+	# Adding log for expected columns based on header
+	print("Expected column count based on header: ", column_count)
+	# Explicitly check if header count is 7, as the error suggests
+	if column_count != 7:
+		printerr("Warning: Header columns count (", column_count, ") is not 7 in ", ENEMY_CSV_PATH)
+
+	var line_number = 1 # Start counting after header
 	while not file.eof_reached():
+		# Adding log before reading each line
+		print("Processing line ", line_number, " in ", ENEMY_CSV_PATH)
+
 		var data = file.get_csv_line()
+		var current_line_for_error = line_number # Store line number for potential error message
+		line_number += 1
+
 		# Skip empty lines or lines with incorrect column count
-		if data.is_empty() or data.size() != column_count: 
-			if not data.is_empty(): # Print warning only if line is not empty but malformed
-				printerr("Skipping malformed CSV line (expected 7 columns): ", data)
-			continue 
+		# The original error likely comes from Godot's internal CSV parser when data.size() is wrong
+		# But we add our own check/log here as well
+		if data.is_empty() or data.size() != column_count:
+			# Check for completely empty line often found at the end of CSV files
+			if data.size() == 1 and data[0] == "":
+				print("Detected empty line at line ", current_line_for_error ," (likely end of file), skipping.")
+				continue
+			elif not data.is_empty(): # Print warning only if line is not empty but malformed
+				# Log the problematic line data
+				printerr("Malformed CSV line detected at line ", current_line_for_error, ". Expected ", column_count, " columns, got ", data.size(), ". Data: ", data)
+				# The original error you saw might be printed by Godot *before* this printerr,
+				# but this log confirms which line caused it in *our* processing logic.
+			else: # Handle other empty data cases if necessary
+				print("Skipping potentially empty data line ", current_line_for_error, ".")
+
+			continue
 
 		var enemy_resource = EnemyResource.new()
 		
@@ -63,13 +88,15 @@ func _load_enemies_from_csv():
 		# Assign loot_level (index updated)
 		enemy_resource.loot_level = int(data[6]) if data[6].is_valid_int() else 0
 
-		if not enemy_resource.name.is_empty():
-			if _enemies.has(enemy_resource.name):
+		if not enemy_resource.character_class.is_empty():
+			if _enemies.has(enemy_resource.character_class):
 				printerr("Duplicate enemy name found in CSV: ", enemy_resource.name, ". Overwriting.")
-			_enemies[enemy_resource.name] = enemy_resource
+			_enemies[enemy_resource.character_class] = enemy_resource
 		else:
-			printerr("Skipping enemy entry with empty name.")
+			printerr("Skipping enemy entry with empty character_class at line ", current_line_for_error, ".")
 
+	# Adding log after processing finishes
+	print("Finished loading enemies from: ", ENEMY_CSV_PATH)
 	file.close() # Ensure file is closed
 
 
@@ -78,4 +105,5 @@ func get_enemy(enemy_name: String) -> EnemyResource:
 	Retrieves an EnemyResource by its name.
 	Returns null if the enemy is not found.
 	"""
+	print("Getting enemy: ", _enemies)
 	return _enemies.get(enemy_name, null)

@@ -83,3 +83,6 @@ func hurt(_opponent: Character):
 	await get_tree().create_timer(0.1).timeout
 	sprite.modulate = original_color
 	EventBus.after_hurt.emit(self, _opponent)
+
+func is_alive() -> bool:
+	return character_resource.HP > 0

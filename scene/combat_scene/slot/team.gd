@@ -1,6 +1,10 @@
 extends Node2D
 class_name Team
 
+# No script logic needed for now.
+# This node acts purely as a container and positioning anchor
+# for characters added by CombatManager.
+
 @export var slot_prefab: PackedScene
 @export var slot_definitions: Dictionary = {}
 
