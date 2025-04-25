@@ -7,6 +7,7 @@ class_name Character
 @onready var sprite: Sprite2D = $Sprite2D # Assuming the sprite node is named Sprite2D
 @onready var hp_label: Label = $HPLabel
 @onready var attack_label: Label = $AttackLabel
+@onready var hit_area: Area2D = $HitArea
 
 @export var attack_move_duration: float = 0.2
 @export var attack_horizontal_offset: float = 24.0
@@ -28,7 +29,7 @@ func set_character_resource(new_resource: CharacterResource):
 		if character_resource.is_connected("hp_changed",Callable(self,"update_labels")):
 			character_resource.disconnect("hp_changed",Callable(self,"update_labels"))
 
-	character_resource = new_resource
+	character_resource = new_resource.duplicate()
 
 	if character_resource and is_instance_valid(character_resource):
 		# 连接信号到 update_labels
@@ -39,8 +40,10 @@ func set_character_resource(new_resource: CharacterResource):
 	# 立即更新一次标签
 	await ready
 	update_labels()
+	hit_area.area_entered.connect(hurt)
 
-func update_labels():
+func update_labels(_value = null):
+	print("update_labels")
 	if character_resource:
 		attack_label.text = str(character_resource.attack)
 		hp_label.text = str(character_resource.HP)
@@ -64,7 +67,6 @@ func play_attack_animation(target: Character):
 
 	# Calculate final position
 	var final_target_position = target.global_position + move_offset
-	# print("target.global_position: ", target.global_position) # Keep the print for now if needed for debugging, or remove it.
 	tween_move_to.tween_property(self, "global_position", final_target_position, attack_move_duration).set_trans(Tween.TRANS_SINE)
 	await tween_move_to.finished # Wait for movement to target to finish
 
@@ -113,13 +115,37 @@ func attack(target: Character):
 	is_attacking = false # Reset the flag after all movements are complete
 	EventBus.after_attack.emit(self, target)
 
-func hurt(_opponent: Character):
-	EventBus.before_hurt.emit(self, _opponent)
+func hurt(area: Area2D):
+	var opponent: Character = null # Initialize opponent
+
+	# Check if the owner of the entering area is a Character
+	if area.owner is Character:
+		opponent = area.owner as Character
+	else:
+		opponent = area.opponent
+
+	# If no valid opponent Character was found, exit
+	if not opponent:
+		printerr("Hurt triggered, but the entering area's owner is not a Character: ", area.owner)
+		return
+	# Proceed with hurt logic using the identified opponent
+	EventBus.before_hurt.emit(self, opponent)
 	var original_color = sprite.modulate
 	sprite.modulate = Color.RED
 	await get_tree().create_timer(0.1).timeout
+	character_resource.HP -= opponent.character_resource.attack
+	if character_resource.HP <= 0:
+		die() # Call die method if HP is zero or less
 	sprite.modulate = original_color
-	EventBus.after_hurt.emit(self, _opponent)
+	EventBus.after_hurt.emit(self, opponent)
 
 func is_alive() -> bool:
 	return character_resource.HP > 0
+
+func die():
+	# TODO: Implement death logic, e.g., play death animation, emit signal, remove node
+	print(character_resource.name + " has died.")
+	if animation_player.has_animation("dying"):
+		animation_player.play("dying")
+		await animation_player.animation_finished
+	queue_free() # Example: remove the character from the scene

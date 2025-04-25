@@ -48,7 +48,7 @@ func _add_character(char_resource: CharacterResource, team_array: Array[Characte
 	if not team_node:
 		printerr("CombatManager: Cannot add character, ", team_name, " node is missing.")
 		return
-
+	print("char_resource: ", char_resource)
 	var character = Character.from_resource(char_resource)
 	character.set_character_resource(char_resource)
 	team_array.append(character)
@@ -155,17 +155,6 @@ func _find_next_alive_character(team: Array[Character], current_index: int) -> C
 		if is_instance_valid(character) and character.is_alive():
 			return character
 	return null # 没有找到存活的角色
-
-# # 重新构建队列并继续回合 (不再需要)
-# func _rebuild_and_continue_turn():
-# 	_build_turn_queue()
-# 	if _turn_queue.is_empty():
-# 		# 如果重建后队列为空，根据敌人存活情况结束战斗
-# 		_end_battle(not enemies.filter(func(e): return is_instance_valid(e) and e.is_alive()).is_empty())
-# 	elif _battle_active:
-# 		_current_attacker_index = -1 # 重置索引
-# 		call_deferred("_next_turn") # 开始新回合
-
 # 移除英雄
 func remove_hero(hero: Character):
 	_remove_character(hero, heroes, hero_vertical_spacing, hero_top_offset)

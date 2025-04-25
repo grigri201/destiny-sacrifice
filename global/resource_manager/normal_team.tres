@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TeamResource" load_steps=4 format=3 uid="uid://b3yrdrs03ps4u"]
+
+[ext_resource type="Script" uid="uid://brvh42sjbp4qh" path="res://character/character_resource.gd" id="1_xectj"]
+[ext_resource type="Script" uid="uid://bucjuhr3farq5" path="res://global/resource/magic/magic_resource.gd" id="2_vnxcc"]
+[ext_resource type="Script" uid="uid://5lb3etyfipjy" path="res://global/resource/team_resource.gd" id="3_dh7pr"]
+
+[resource]
+script = ExtResource("3_dh7pr")
+gold = 100
+magic_cards = Array[ExtResource("2_vnxcc")]([])
+hero_team = Array[ExtResource("1_xectj")]([])
+level = 1
+level_up_cost = Array[int]([2, 3, 4, 5, 6, 7, 8])
+metadata/_custom_type_script = "uid://5lb3etyfipjy"

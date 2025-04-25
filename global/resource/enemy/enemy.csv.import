@@ -2,12 +2,14 @@
 
 importer="csv_translation"
 type="Translation"
-uid="uid://b1t80ib1heb36"
-valid=false
+uid="uid://binsvaksj4jw1"
 
 [deps]
 
+files=["res://global/resource/enemy/enemy.character.translation", "res://global/resource/enemy/enemy.type.translation", "res://global/resource/enemy/enemy.attack.translation", "res://global/resource/enemy/enemy.hp.translation", "res://global/resource/enemy/enemy.skills.translation", "res://global/resource/enemy/enemy.loot.translation"]
+
 source_file="res://global/resource/enemy/enemy.csv"
+dest_files=["res://global/resource/enemy/enemy.character.translation", "res://global/resource/enemy/enemy.type.translation", "res://global/resource/enemy/enemy.attack.translation", "res://global/resource/enemy/enemy.hp.translation", "res://global/resource/enemy/enemy.skills.translation", "res://global/resource/enemy/enemy.loot.translation"]
 
 [params]
 

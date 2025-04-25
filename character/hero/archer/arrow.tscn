@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://dky4mp4bs6xww"]
+
+[ext_resource type="Script" uid="uid://c5wx1n6am57dq" path="res://character/hero/archer/arrow.gd" id="1_7r84i"]
+[ext_resource type="Texture2D" uid="uid://c10lida3wayqo" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 02 Archer/32x32/Arrow Archer-Sheet2x.png" id="1_qdls2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v1o0d"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_7r84i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qdls2"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7r84i"]
+_data = {
+&"RESET": SubResource("Animation_7r84i"),
+&"idle": SubResource("Animation_qdls2")
+}
+
+[node name="Arrow" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_7r84i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(9, 0)
+shape = SubResource("CircleShape2D_v1o0d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qdls2")
+offset = Vector2(0, -4)
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7r84i")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

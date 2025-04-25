@@ -1,3 +1,112 @@
-[gd_scene format=3 uid="uid://dlav1ho8km1vf"]
+[gd_scene load_steps=4 format=3 uid="uid://dlav1ho8km1vf"]
+
+[ext_resource type="Script" uid="uid://c88hjmra1vmh1" path="res://scene/strategy_scene/strategy_scene.gd" id="1_emx6c"]
+[ext_resource type="Texture2D" uid="uid://c1tsf6vgjevaf" path="res://art/texture/icon/gold.tres" id="2_ggxuu"]
+[ext_resource type="Theme" uid="uid://de5knj4bua7mn" path="res://theme/ui_font.tres" id="3_8eynj"]
 
 [node name="StrategyScene" type="Node2D"]
+script = ExtResource("1_emx6c")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TeamContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+
+[node name="TeamContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/TeamContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="MagicCardGrid" type="GridContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_ggxuu")
+expand_mode = 2
+
+[node name="GoldLabel" type="Label" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LevelUpButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "升级"
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_8eynj")
+text = "Level 6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RefreshButton2" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "刷新"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Deck" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/LevelUpButton" to="." method="_on_level_up_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/RefreshButton2" to="." method="_on_refresh_button_2_pressed"]

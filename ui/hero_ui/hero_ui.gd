@@ -5,7 +5,7 @@ signal exit_button_pressed
 
 const HeroUIScene = preload("res://ui/hero_ui/hero_ui.tscn")
 
-var _show_exit_button: bool = true
+@export var show_exit_button: bool = true
 var character_resource: CharacterResource
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -18,7 +18,7 @@ static func from_resource() -> Control:
 	return instance
 
 func _process(_delta: float) -> void:
-	if _show_exit_button:
+	if show_exit_button:
 		exit_button.show()
 	else:
 		exit_button.hide()

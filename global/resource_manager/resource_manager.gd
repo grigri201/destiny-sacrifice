@@ -43,6 +43,17 @@ func get_random_skill() -> SkillResource:
 	return all_skills[random_skill_key]
 
 
+func get_random_magic() -> MagicResource:
+	var all_magics = MagicMap.get_all_magics()
+	if all_magics.is_empty():
+		printerr("MagicMap is empty!")
+		return null
+
+	var magic_keys = all_magics.keys()
+	var random_magic_key = magic_keys[randi() % magic_keys.size()]
+	return all_magics[random_magic_key]
+
+
 func generate_enemy(enemy_key: String) -> EnemyResource:
 	var enemy_resource = EnemyMap.get_enemy(enemy_key)
 	if enemy_resource == null:

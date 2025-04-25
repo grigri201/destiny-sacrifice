@@ -21,9 +21,8 @@ var _hp: int = 0
 @export var HP: int:
 	get:
 		return _hp
-	set(value):
+	set(new_hp):
 		# 可以添加一些逻辑，比如确保 HP 不会低于 0
-		var new_hp = max(0, value)
 		if _hp != new_hp:
 			_hp = new_hp
 			hp_changed.emit(_hp) # 发出信号

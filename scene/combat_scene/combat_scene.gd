@@ -27,7 +27,7 @@ func _ready():
 	print("BattleScene: Finished hero team generation.")
 
 	# --- Enemy Team Initialization ---
-	var enemy_count = 3 # Example count
+	var enemy_count = 8 # Example count
 	var enemy_type = "skeleton" # Example type
 	print("BattleScene: Starting enemy team generation...")
 	for i in range(enemy_count):

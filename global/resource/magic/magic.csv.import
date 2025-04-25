@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bvaeygbonbxl0"
+
+[deps]
+
+files=["res://global/resource/magic/magic.name.translation", "res://global/resource/magic/magic.description.translation", "res://global/resource/magic/magic.unlock.translation"]
+
+source_file="res://global/resource/magic/magic.csv"
+dest_files=["res://global/resource/magic/magic.name.translation", "res://global/resource/magic/magic.description.translation", "res://global/resource/magic/magic.unlock.translation"]
+
+[params]
+
+compress=true
+delimiter=0

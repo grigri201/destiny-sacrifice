@@ -1,7 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c1tsf6vgjevaf"]
-
-[ext_resource type="Texture2D" uid="uid://colqd6kj0hdbk" path="res://art/MiniRogue Dungeon Premium/5 - Icons/32x32/Icon2x.png" id="1_2p1j4"]
-
-[resource]
-atlas = ExtResource("1_2p1j4")
-region = Rect2(96, 0, 32, 32)

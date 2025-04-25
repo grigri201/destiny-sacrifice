@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cgi7vv2yxff16"]
 
-[ext_resource type="Script" uid="uid://bxkmesef7heco" path="res://character/hero/hero.gd" id="1_8y0r3"]
-[ext_resource type="Resource" uid="uid://4mb8yxkonil4" path="res://global/resource/hero/archer.tres" id="2_njnx8"]
+[ext_resource type="Script" uid="uid://3dvo4noy0l8y" path="res://character/hero/archer/archer.gd" id="1_8y0r3"]
+[ext_resource type="PackedScene" uid="uid://dky4mp4bs6xww" path="res://character/hero/archer/arrow.tscn" id="2_njnx8"]
 [ext_resource type="Texture2D" uid="uid://geniubftwwoy" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 02 Archer/32x32/Hero02 Archer Atk-Sheet2x.png" id="2_p8et5"]
 [ext_resource type="Theme" uid="uid://de5knj4bua7mn" path="res://theme/ui_font.tres" id="3_oepjx"]
 [ext_resource type="Texture2D" uid="uid://bow2btq3jm038" path="res://art/MiniRogue Dungeon Premium/3 - Heroes/Hero 02 Archer/32x32/Hero02 Archer Idle-Sheet2x.png" id="3_p8et5"]
@@ -47,7 +47,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_cqs88"]
 resource_name = "attack"
-length = 1.2
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -80,10 +79,10 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 
 [sub_resource type="Animation" id="Animation_3iej3"]
@@ -135,12 +134,11 @@ _data = {
 &"idle": SubResource("Animation_3iej3")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8y0r3"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_njnx8"]
 
 [node name="Archer" type="Node2D"]
 script = ExtResource("1_8y0r3")
-character_resource = ExtResource("2_njnx8")
+arrow_scene = ExtResource("2_njnx8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_p8et5")
@@ -151,10 +149,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_cqs88")
 }
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HitArea" type="Area2D" parent="."]
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_8y0r3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(-2, 6)
+shape = SubResource("CircleShape2D_njnx8")
 
 [node name="AttackLabel" type="Label" parent="."]
 anchors_preset = 8
@@ -189,3 +189,6 @@ theme = ExtResource("3_oepjx")
 text = "999"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ArrowSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(14, 10)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2hea2f0uovqa"]
+[gd_scene load_steps=13 format=3 uid="uid://c2hea2f0uovqa"]
 
 [ext_resource type="Texture2D" uid="uid://ccls1wwcv5h5" path="res://art/MiniRogue Dungeon Premium/2 - Enemies/Enemy05 Skeleton/32x32/Enemy05Idle-Sheet2x.png" id="1_4248m"]
 [ext_resource type="Script" uid="uid://biiv42r0opcg6" path="res://character/enemy/enemy.gd" id="1_vvwke"]
@@ -44,6 +44,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyAttack/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_w8no2"]
 resource_name = "attack"
@@ -84,6 +96,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyAttack/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="Animation_vvwke"]
@@ -177,8 +201,11 @@ _data = {
 &"idle": SubResource("Animation_4248m")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvwke"]
-size = Vector2(32, 32)
+[sub_resource type="CircleShape2D" id="CircleShape2D_k8fq8"]
+radius = 9.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8fq8"]
+size = Vector2(30, 8)
 
 [node name="Skeleton" type="Node2D"]
 script = ExtResource("1_vvwke")
@@ -192,10 +219,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_w8no2")
 }
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_vvwke")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(5, 3)
+shape = SubResource("CircleShape2D_k8fq8")
 
 [node name="AttackLabel" type="Label" parent="."]
 anchors_preset = 8
@@ -229,4 +259,11 @@ theme = ExtResource("5_h3i4k")
 text = "999"
 vertical_alignment = 1
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[node name="EnemyAttack" type="Area2D" parent="."]
+position = Vector2(-25, 0)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAttack"]
+position = Vector2(18, 1)
+shape = SubResource("RectangleShape2D_k8fq8")
+disabled = true
