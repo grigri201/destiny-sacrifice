@@ -9,8 +9,8 @@ var current_card: MagicCard
 var targeting := false
 
 func _ready() -> void:
-	EventBus.magic_card_aim_started.emit(_on_magic_card_aim_started)
-	EventBus.magic_card_aim_ended.emit(_on_magic_card_aim_ended)
+	EventBus.magic_card_aim_started.connect(_on_magic_card_aim_started)
+	EventBus.magic_card_aim_ended.connect(_on_magic_card_aim_ended)
 
 func _process(_delta: float) -> void:
 	if not targeting:
@@ -37,6 +37,8 @@ func ease_out_cubic(number: float) -> float:
 	return 1.0 - pow(1.0 - number, 3.0)
 
 func _on_magic_card_aim_started(card: MagicCard) -> void:
+	print("magic_card_aim_started: ", card.magic_resource.name)
+	print("is_single_target: ", card.magic_resource.is_single_target())
 	if not card.magic_resource.is_single_target():
 		return
 	targeting = true
@@ -45,6 +47,7 @@ func _on_magic_card_aim_started(card: MagicCard) -> void:
 	current_card = card
 
 func _on_magic_card_aim_ended(_card: MagicCard) -> void:
+	print("magic_card_aim_ended: ", _card.magic_resource.name)
 	targeting = false
 	arc.clear_points()
 	area_2d.position = Vector2.ZERO
@@ -55,10 +58,11 @@ func _on_magic_card_aim_ended(_card: MagicCard) -> void:
 func _on_area_2d_area_exited(area:Area2D) -> void:
 	if not current_card or not targeting:
 		return
-	if not current_card.targets.has(area):
-		current_card.targets.append(area)
+	current_card.targets.erase(area)
 
 func _on_area_2d_area_entered(area:Area2D) -> void:
 	if not current_card or not targeting:
 		return
-	current_card.targets.erase(area)
+	if not current_card.targets.has(area):
+		current_card.targets.append(area)
+	

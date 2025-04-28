@@ -10,6 +10,7 @@ enum State {
 	AIMING,
 	ONSALE,
 	RELEASED,
+	BUYING,
 }
 
 @export var state: State

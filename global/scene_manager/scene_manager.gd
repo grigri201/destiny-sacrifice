@@ -14,23 +14,8 @@ func get_team() -> Array[CharacterResource]:
 func get_gold() -> int:
 	return team_resource.gold
 
-func set_gold(gold: int) -> void:
-	team_resource.gold = gold
-
 func get_level() -> int:
 	return team_resource.level
 
-func set_level(level: int) -> void:
-	team_resource.level = level
-
-func add_magic_card(magic_card: MagicCardResource) -> void:
-	team_resource.magic_cards.append(magic_card)
-
 func get_magic_cards() -> Array[MagicCardResource]:
 	return team_resource.magic_cards
-
-func set_magic_cards(magic_cards: Array[MagicCardResource]) -> void:
-	team_resource.magic_cards = magic_cards
-
-func remove_magic_card(magic_card: MagicCardResource) -> void:
-	team_resource.magic_cards.erase(magic_card)

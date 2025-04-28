@@ -1,12 +1,13 @@
 extends MagicCardState
 
 func enter() -> void:
+	print("enter base state")
 	if not magic_card.is_node_ready():
 		await magic_card.ready
 
 	if magic_card.tween and magic_card.tween.is_running():
 		magic_card.tween.kill()
-
+	print("reparent to hand requested")
 	magic_card.reparent_to_hand_requested.emit(magic_card)
 	magic_card.color.color = Color.WEB_GREEN
 	magic_card.pivot_offset = Vector2.ZERO

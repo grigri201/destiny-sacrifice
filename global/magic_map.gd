@@ -33,6 +33,11 @@ func _load_magics():
 		else:
 			printerr("Invalid unlock_level '", data[3], "' for magic_resource '", magic.key, "' in ", MAGIC_CSV_PATH)
 			magic.unlock_level = 0 # Or handle the error as needed
+		if data[5].strip_edges().is_valid_int():
+			magic.price = int(data[5].strip_edges())
+		else:
+			printerr("Invalid cost '", data[5], "' for magic_resource '", magic.key, "' in ", MAGIC_CSV_PATH)
+			magic.price = 10 # Or handle the error as needed
 
 		if magic_map.has(magic.key):
 			printerr("Duplicate magic_resource key found: ", magic.key, " in ", MAGIC_CSV_PATH)

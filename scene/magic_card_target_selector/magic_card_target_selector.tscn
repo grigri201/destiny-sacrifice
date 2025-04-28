@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdeqec0k5ngqg"]
+[gd_scene load_steps=5 format=3 uid="uid://bdeqec0k5ngqg"]
 
 [ext_resource type="Script" uid="uid://ci8m73vxo7klh" path="res://scene/magic_card_target_selector/arc.gd" id="1_2pjhe"]
 [ext_resource type="Script" uid="uid://gbpedl176kaj" path="res://scene/magic_card_target_selector/magic_card_target_selector.gd" id="1_hcsc4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yumqx"]
 size = Vector2(4, 4)
+
+[sub_resource type="Curve" id="Curve_hcsc4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.851852, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="MagicCardTargetSelector" type="Node2D"]
 script = ExtResource("1_hcsc4")
@@ -21,6 +25,7 @@ shape = SubResource("RectangleShape2D_yumqx")
 layer = 2
 
 [node name="Arc" type="Line2D" parent="CanvasLayer"]
+width_curve = SubResource("Curve_hcsc4")
 script = ExtResource("1_2pjhe")
 metadata/_custom_type_script = "uid://ci8m73vxo7klh"
 

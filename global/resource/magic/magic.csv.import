@@ -6,10 +6,10 @@ uid="uid://bvaeygbonbxl0"
 
 [deps]
 
-files=["res://global/resource/magic/magic.name.translation", "res://global/resource/magic/magic.description.translation", "res://global/resource/magic/magic.unlock.translation"]
+files=["res://global/resource/magic/magic.name.translation", "res://global/resource/magic/magic.description.translation", "res://global/resource/magic/magic.unlock.translation", "res://global/resource/magic/magic.target.translation", "res://global/resource/magic/magic.price.translation"]
 
 source_file="res://global/resource/magic/magic.csv"
-dest_files=["res://global/resource/magic/magic.name.translation", "res://global/resource/magic/magic.description.translation", "res://global/resource/magic/magic.unlock.translation"]
+dest_files=["res://global/resource/magic/magic.name.translation", "res://global/resource/magic/magic.description.translation", "res://global/resource/magic/magic.unlock.translation", "res://global/resource/magic/magic.target.translation", "res://global/resource/magic/magic.price.translation"]
 
 [params]
 

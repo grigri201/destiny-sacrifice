@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlav1ho8km1vf"]
+[gd_scene load_steps=10 format=4 uid="uid://dlav1ho8km1vf"]
 
 [ext_resource type="Script" uid="uid://c88hjmra1vmh1" path="res://scene/strategy_scene/strategy_scene.gd" id="1_emx6c"]
 [ext_resource type="Texture2D" uid="uid://c1tsf6vgjevaf" path="res://art/texture/icon/gold.tres" id="2_ggxuu"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dwy1qhxu6mhm1" path="res://scene/strategy_scene/magic_card_grid.gd" id="3_d6cc8"]
 [ext_resource type="Script" uid="uid://bwnkp50vcvj7d" path="res://scene/strategy_scene/hand.gd" id="4_bbh1p"]
 [ext_resource type="PackedScene" uid="uid://bdeqec0k5ngqg" path="res://scene/magic_card_target_selector/magic_card_target_selector.tscn" id="5_dqq8i"]
+[ext_resource type="TileSet" uid="uid://ciepg58tx8ih" path="res://tile/dungeon.tres" id="7_cfner"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8eynj"]
 size = Vector2(159, 216)
@@ -16,6 +17,11 @@ size = Vector2(512, 60)
 [node name="StrategyScene" type="Node2D"]
 script = ExtResource("1_emx6c")
 
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(-1, -333)
+tile_map_data = PackedByteArray("AAAAAAoAAwAIAAQAAAAAAAsAAwAIAAUAAAAAAAwAAwAAAAkAAAAAAA0AAwAAAAkAAAAAAA4AAwAAAAkAAAAAAA8AAwAAAAkAAAAAABAAAwAAAAkAAAAAABEAAwAAAAkAAAAAABIAAwAAAAkAAAAAABMAAwAAAAkAAAABAAoAAwAGAAQAAAABAAsAAwAGAAUAAAABAAwAAwAAAAkAAAABAA0AAwAAAAkAAAABAA4AAwAAAAkAAAABAA8AAwAAAAkAAAABABAAAwAAAAkAAAABABEAAwAAAAkAAAABABIAAwAAAAkAAAABABMAAwAAAAkAAAACAAoAAwAHAAQAAAACAAsAAwAHAAUAAAACAAwAAwAAAAkAAAACAA0AAwAAAAkAAAACAA4AAwAAAAkAAAACAA8AAwAAAAkAAAACABAAAwAAAAkAAAACABEAAwAAAAkAAAACABIAAwAAAAkAAAACABMAAwAAAAkAAAADAAoAAwAIAAQAAAADAAsAAwAIAAUAAAADAAwAAwAAAAkAAAADAA0AAwAAAAkAAAADAA4AAwAAAAkAAAADAA8AAwAAAAkAAAADABAAAwAAAAkAAAADABEAAwAAAAkAAAADABIAAwAAAAkAAAADABMAAwAAAAkAAAAEAAoAAwAGAAQAAAAEAAsAAwAGAAUAAAAEAAwAAwAAAAkAAAAEAA0AAwAAAAkAAAAEAA4AAwAAAAkAAAAEAA8AAwAAAAkAAAAEABAAAwAAAAkAAAAEABEAAwAAAAkAAAAEABIAAwAAAAkAAAAEABMAAwAAAAkAAAAFAAoAAwAHAAQAAAAFAAsAAwAHAAUAAAAFAAwAAwAAAAkAAAAFAA0AAwAAAAkAAAAFAA4AAwAAAAkAAAAFAA8AAwAAAAkAAAAFABAAAwAAAAkAAAAFABEAAwAAAAkAAAAFABIAAwAAAAkAAAAFABMAAwAAAAkAAAAGAAoAAwAIAAQAAAAGAAsAAwAIAAUAAAAGAAwAAwAAAAkAAAAGAA0AAwAAAAkAAAAGAA4AAwAAAAkAAAAGAA8AAwAAAAkAAAAGABAAAwAAAAkAAAAGABEAAwAAAAkAAAAGABIAAwAAAAkAAAAGABMAAwAAAAkAAAAHAAoAAwAGAAQAAAAHAAsAAwAGAAUAAAAHAAwAAwAAAAkAAAAHAA0AAwAAAAkAAAAHAA4AAwAAAAkAAAAHAA8AAwAAAAkAAAAHABAAAwAAAAkAAAAHABEAAwAAAAkAAAAHABIAAwAAAAkAAAAHABMAAwAAAAkAAAAIAAoAAwAHAAQAAAAIAAsAAwAHAAUAAAAIAAwAAwAAAAkAAAAIAA0AAwAAAAkAAAAIAA4AAwAAAAkAAAAIAA8AAwAAAAkAAAAIABAAAwAAAAkAAAAIABEAAwAAAAkAAAAIABIAAwAAAAkAAAAIABMAAwAAAAkAAAAJAAoAAwAIAAQAAAAJAAsAAwAIAAUAAAAJAAwAAwAAAAkAAAAJAA0AAwAAAAkAAAAJAA4AAwAAAAkAAAAJAA8AAwAAAAkAAAAJABAAAwAAAAkAAAAJABEAAwAAAAkAAAAJABIAAwAAAAkAAAAJABMAAwAAAAkAAAAKAAoAAwAGAAQAAAAKAAsAAwAGAAUAAAAKAAwAAwAAAAkAAAAKAA0AAwAAAAkAAAAKAA4AAwAAAAkAAAAKAA8AAwAAAAkAAAAKABAAAwAAAAkAAAAKABEAAwAAAAkAAAAKABIAAwAAAAkAAAAKABMAAwAAAAkAAAALAAoAAwAHAAQAAAALAAsAAwAHAAUAAAALAAwAAwAAAAkAAAALAA0AAwAAAAkAAAALAA4AAwAAAAkAAAALAA8AAwAAAAkAAAALABAAAwAAAAkAAAALABEAAwAAAAkAAAALABIAAwAAAAkAAAALABMAAwAAAAkAAAAMAAoAAwAIAAQAAAAMAAsAAwAIAAUAAAAMAAwAAwAAAAkAAAAMAA0AAwAAAAkAAAAMAA4AAwAAAAkAAAAMAA8AAwAAAAkAAAAMABAAAwAAAAkAAAAMABEAAwAAAAkAAAAMABIAAwAAAAkAAAAMABMAAwAAAAkAAAANAAoAAwAGAAQAAAANAAsAAwAGAAUAAAANAAwAAwAAAAkAAAANAA0AAwAAAAkAAAANAA4AAwAAAAkAAAANAA8AAwAAAAkAAAANABAAAwAAAAkAAAANABEAAwAAAAkAAAANABIAAwAAAAkAAAANABMAAwAAAAkAAAAOAAoAAwAHAAQAAAAOAAsAAwAHAAUAAAAOAAwAAwAAAAkAAAAOAA0AAwAAAAkAAAAOAA4AAwAAAAkAAAAOAA8AAwAAAAkAAAAOABAAAwAAAAkAAAAOABEAAwAAAAkAAAAOABIAAwAAAAkAAAAOABMAAwAAAAkAAAAPAAoAAwAIAAQAAAAPAAsAAwAIAAUAAAAPAAwAAwAAAAkAAAAPAA0AAwAAAAkAAAAPAA4AAwAAAAkAAAAPAA8AAwAAAAkAAAAPABAAAwAAAAkAAAAPABEAAwAAAAkAAAAPABIAAwAAAAkAAAAPABMAAwAAAAkAAAAQAAoAAwAGAAQAAAAQAAsAAwAGAAUAAAAQAAwAAwAAAAkAAAAQAA0AAwAAAAkAAAAQAA4AAwAAAAkAAAAQAA8AAwAAAAkAAAAQABAAAwAAAAkAAAAQABEAAwAAAAkAAAAQABIAAwAAAAkAAAAQABMAAwAAAAkAAAD+/wkAAwABAAAAAAD+/woAAwAGAAQAAAD+/wsAAwAGAAUAAAD+/wwAAwAAAAkAAAD+/w0AAwAAAAkAAAD+/w4AAwAAAAkAAAD+/w8AAwAAAAkAAAD+/xAAAwAAAAkAAAD+/xEAAwAAAAkAAAD+/xIAAwAAAAkAAAD+/xMAAwAAAAkAAAD+/xQAAwAAAAkAAAD//wkAAwABAAAAAAD//woAAwAHAAQAAAD//wsAAwAHAAUAAAD//wwAAwAAAAkAAAD//w0AAwAAAAkAAAD//w4AAwAAAAkAAAD//w8AAwAAAAkAAAD//xAAAwAAAAkAAAD//xEAAwAAAAkAAAD//xIAAwAAAAkAAAD//xMAAwAAAAkAAAD//xQAAwAAAAkAAAAAAAkAAwABAAAAAAAAABQAAwAAAAkAAAABAAkAAwABAAAAAAABABQAAwAAAAkAAAACAAkAAwABAAAAAAACABQAAwAAAAkAAAADAAkAAwABAAAAAAADABQAAwAAAAkAAAAEAAkAAwABAAAAAAAEABQAAwAAAAkAAAAFAAkAAwABAAAAAAAFABQAAwAAAAkAAAAGAAkAAwABAAAAAAAGABQAAwAAAAkAAAAHAAkAAwABAAAAAAAHABQAAwAAAAkAAAAIAAkAAwABAAAAAAAIABQAAwAAAAkAAAAJAAkAAwABAAAAAAAJABQAAwAAAAkAAAAKAAkAAwABAAAAAAAKABQAAwAAAAkAAAALAAkAAwABAAAAAAALABQAAwAAAAkAAAAMAAkAAwABAAAAAAAMABQAAwAAAAkAAAANAAkAAwABAAAAAAANABQAAwAAAAkAAAAOAAkAAwABAAAAAAAOABQAAwAAAAkAAAAPAAkAAwABAAAAAAAPABQAAwAAAAkAAAAQAAkAAwABAAAAAAAQABQAAwAAAAkAAAARAAkAAwABAAAAAAARAAoAAwAHAAQAAAARAAsAAwAHAAUAAAARAAwAAwAAAAkAAAARAA0AAwAAAAkAAAARAA4AAwAAAAkAAAARAA8AAwAAAAkAAAARABAAAwAAAAkAAAARABEAAwAAAAkAAAARABIAAwAAAAkAAAARABMAAwAAAAkAAAARABQAAwAAAAkAAAA=")
+tile_set = ExtResource("7_cfner")
+
 [node name="CardDropArea" type="Area2D" parent="."]
 collision_layer = 512
 collision_mask = 256
@@ -23,14 +29,16 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
 position = Vector2(79.5, 106)
 shape = SubResource("RectangleShape2D_8eynj")
+debug_color = Color(0.824915, 0.196882, 0.846033, 0.42)
 
-[node name="DeckDropArea" type="Area2D" parent="."]
+[node name="HandDropArea" type="Area2D" parent="."]
 collision_layer = 1024
 collision_mask = 256
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeckDropArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HandDropArea"]
 position = Vector2(255.5, 258)
 shape = SubResource("RectangleShape2D_bbh1p")
+debug_color = Color(0.373968, 0.501884, 0.926782, 0.42)
 
 [node name="MagicCardTargetSelector" parent="." instance=ExtResource("5_dqq8i")]
 
@@ -46,10 +54,6 @@ grow_vertical = 2
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer"]
 layout_mode = 2
@@ -69,19 +73,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="MagicCardGrid" type="GridContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-columns = 5
-script = ExtResource("3_d6cc8")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
@@ -117,19 +108,29 @@ text = "Level 6"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RefreshButton2" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="RefreshButton" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "刷新"
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
+
+[node name="MagicCardGrid" type="GridContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 5
+script = ExtResource("3_d6cc8")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
 
 [node name="Hand" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer2"]
 unique_name_in_owner = true
@@ -138,4 +139,4 @@ alignment = 1
 script = ExtResource("4_bbh1p")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/LevelUpButton" to="." method="_on_level_up_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/RefreshButton2" to="." method="_on_refresh_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/RefreshButton" to="." method="_on_refresh_button_pressed"]

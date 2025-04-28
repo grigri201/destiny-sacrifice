@@ -13,8 +13,13 @@ var available_magics = []
 @onready var level_up_button: Button = %LevelUpButton
 
 func _ready():
-	_sync_team_data()
-	_select_and_print_random_magic_cards()
+	# Connect the team_data_changed signal BEFORE the initial sync
+	if SceneManager.team_resource and not SceneManager.team_resource.team_data_changed.is_connected(_sync_team_data):
+		SceneManager.team_resource.team_data_changed.connect(_sync_team_data)
+
+	_sync_team_data() # Initial sync
+	_select_random_magic_cards()
+	_generate_test_heroes()
 
 func _sync_team_data():
 	# Get data from SceneManager using getters
@@ -31,7 +36,23 @@ func _sync_team_data():
 	else:
 		level_up_button.visible = true
 
-func _select_and_print_random_magic_cards():
+func _generate_test_heroes():
+	# Clear existing heroes if any
+	for child in team_container.get_children():
+		child.queue_free()
+
+	# Add 4 test hero UI instances with random hero data
+	for i in range(4):
+		var hero_instance = hero_ui_scene.instantiate()
+		var hero_res = ResourceManager.generate_random_hero() # Generate random hero
+		if hero_res: # Check if hero generation was successful
+			hero_instance.set_character_resource(hero_res) # Set the resource on the UI
+		else:
+			printerr("Failed to generate random hero for test slot ", i)
+		hero_instance.show_exit_button = false
+		team_container.add_child(hero_instance)
+
+func _select_random_magic_cards():
 	var team_level = SceneManager.get_level() # Use getter
 	var all_magics = MagicMap.get_all_magics().values() # Get magic resources as an array
 
@@ -46,17 +67,10 @@ func _select_and_print_random_magic_cards():
 	# Shuffle the available magics
 	available_magics.shuffle()
 
-	# Select up to 6 magics (no need to create a new array here)
-	# var selected_magics = [] # Removed this line
-	# var count = min(6, available_magics.size()) # Removed this line
-	# for i in range(count): # Removed this loop
-	# 	selected_magics.append(available_magics[i]) # Removed this line
-
 	# Limit available_magics to 6
 	if available_magics.size() > 6:
 		available_magics.resize(6)
 
-	# Display the selected magic cards in the grid
 	_display_magic_cards()
 
 func _display_magic_cards():
@@ -65,41 +79,80 @@ func _display_magic_cards():
 		child.queue_free()
 
 	# Instantiate and add magic cards to the grid
-	for magic_res in available_magics:
+	for i in range(available_magics.size()): # Use index for storing original position
+		var magic_res = available_magics[i]
 		var card_instance = magic_card_scene.instantiate()
-		magic_card_grid.add_child(card_instance)
 		# Set the magic resource for the card instance
 		card_instance.set_magic_resource(magic_res)
-		# Connect the buy button signal
-		card_instance.buy_button_pressed.connect(buy_magic)
-
-# Add the new function to handle buying magic
-func buy_magic(magic_resource: MagicCardResource) -> void:
-	# Implement logic to buy the magic here
-	# For example, check gold, add magic to player's inventory, update UI, etc.
-	print("Buying magic: ", magic_resource.name) 
-	var current_gold = SceneManager.get_gold()
-	# Assuming a placeholder cost for now, replace with actual logic
-	var magic_cost = 10 # Example cost, you should probably get this from magic_resource
-	if current_gold >= magic_cost:
-		SceneManager.set_gold(current_gold - magic_cost)
-		# Add the magic card resource to the player's data via SceneManager
-		SceneManager.add_magic_card(magic_resource) 
-		_sync_team_data() # Update UI (like gold display)
-
-		# Find and remove the purchased card from the grid
-		for card_node in magic_card_grid.get_children():
-			if card_node is MagicCard and card_node.magic_resource == magic_resource:
-				card_node.queue_free()
-				break # Assuming only one card instance per resource in the shop
-	else:
-		print("Not enough gold to buy ", magic_resource.name)
+		# Store the original index in the store grid
+		card_instance.store_index = i
+		# Connect reparenting signals
+		card_instance.reparent_to_store_requested.connect(_on_magic_card_reparent_to_store)
+		card_instance.reparent_to_hand_requested.connect(_on_magic_card_reparent_to_hand)
+		# Add the card to the grid (GridContainer handles positioning)
+		magic_card_grid.add_child(card_instance)
+		# Explicitly move to ensure order if add_child doesn't guarantee it initially
+		# or if children were previously removed non-sequentially.
+		magic_card_grid.move_child(card_instance, i)
 
 func _on_level_up_button_pressed() -> void:
 	# Keep accessing team_resource here to call level_up method
 	var team_resource = SceneManager.team_resource
-	team_resource.level_up()
-	_sync_team_data()
+	team_resource.level_up() # This will now trigger the signal via the setter
+	# _sync_team_data() # No longer need to call manually here, signal handles it
 
-func _on_refresh_button_2_pressed() -> void:
-	_select_and_print_random_magic_cards()
+func _on_refresh_button_pressed() -> void:
+	# Refresh should likely only reroll cards still in the store,
+	# not affect cards already in the hand. This logic might need adjustment.
+	# For now, assume it rerolls everything shown in the store grid.
+	_select_random_magic_cards()
+
+# Handler for reparenting card to the store grid
+func _on_magic_card_reparent_to_store(card: MagicCard):
+	var original_store_index = card.store_index
+	if card.get_parent() == magic_card_grid:
+		# Already in the grid, ensure position (might be redundant for GridContainer)
+		if original_store_index != -1 and original_store_index < magic_card_grid.get_child_count():
+			magic_card_grid.move_child(card, original_store_index)
+		return
+
+	var current_parent = card.get_parent()
+	if current_parent:
+		current_parent.remove_child(card)
+
+	magic_card_grid.add_child(card)
+	card.parent = magic_card_grid # Manually assign the custom parent variable
+	# GridContainer manages layout, but move_child sets sibling index which might matter
+	if original_store_index != -1 and original_store_index < magic_card_grid.get_child_count():
+		magic_card_grid.move_child(card, original_store_index)
+	else:
+		# If index is invalid, place it at the end and update its stored index
+		card.store_index = magic_card_grid.get_child_count() - 1
+
+	card.hand_index = -1 # Clear hand index
+	print("Card %s moved to store at index %d" % [card.magic_resource.name, card.store_index])
+
+# Handler for reparenting card to the hand
+func _on_magic_card_reparent_to_hand(card: MagicCard):
+	var original_hand_index = card.hand_index
+	if card.get_parent() == hand:
+		# Already in hand, ensure position
+		if original_hand_index != -1 and original_hand_index < hand.get_child_count():
+			hand.move_child(card, original_hand_index)
+		return
+
+	var current_parent = card.get_parent()
+	if current_parent:
+		current_parent.remove_child(card)
+
+	hand.add_child(card)
+	card.parent = hand # Manually assign the custom parent variable
+	# Use move_child to place it at the correct index in HBoxContainer
+	if original_hand_index != -1 and original_hand_index < hand.get_child_count():
+		hand.move_child(card, original_hand_index)
+	else:
+		# First time in hand or index lost, place at end and store new index
+		card.hand_index = hand.get_child_count() - 1
+
+	card.store_index = -1 # Clear store index
+	print("Card %s moved to hand at index %d" % [card.magic_resource.name, card.hand_index])

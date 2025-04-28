@@ -2,10 +2,10 @@ extends Resource
 class_name MagicCardResource
 
 enum Target {
-	SELF,
 	SINGLE_HERO,
+	ALL_HERO,
 	ALL_ENEMIES,
-	EVERYONE,
+	ENVIRONMENT,
 }
 
 @export_group("Card Attributes")
@@ -13,11 +13,11 @@ enum Target {
 @export var name: String
 @export var target: Target
 @export var unlock_level: int
+@export var price: int
 
 @export_group("Card Visuals")
 @export var icon: Texture2D
 @export var description: String
 
 func is_single_target() -> bool:
-	return target == Target.SELF or target == Target.SINGLE_HERO
-
+	return target == Target.SINGLE_HERO

@@ -1,1 +1,12 @@
-﻿key,name,description,unlock_level
+﻿key,name,description,unlock_level,target,price
+arcane_charge,奥能,当英雄释放法术后：自身攻击力+1（可叠加）,1,single_hero,3
+arcane_echo,余波,每回合首次释放法术时：获得该法术的复制,1,single_hero,3
+arrow_shower,箭雨,攻击时：额外对一名随机敌人造成1点伤害,1,enemies,3
+chain_fireball,连火,回合开始时：获得一张“连珠火球”法术卡,1,single_hero,3
+cleaving_strike,顺劈,攻击时：对目标相邻的敌人造成等量伤害,1,enemies,3
+conquest_rhythm,节奏,受到攻击后：立即对攻击者造成一次反击伤害,1,enemies,3
+fireball,火球,对敌人造成1点伤害；每曾使用一次此法术，其基础伤害+1,1,enemies,3
+flame_armor,炎甲,受到伤害后：对攻击者造成1点伤害,1,enemies,3
+hold_the_line,固守,全体英雄本回合受到的伤害-1,1,all_hero,3
+invigorating_anger,怒振,全体英雄的攻击力+1,1,all_hero,3
+iron_will,铁志,全体英雄的生命值+1,1,all_hero,3

@@ -44,4 +44,3 @@ func _on_transition_requested(from: MagicCardState, to: MagicCardState.State) ->
 		current_state.exit()
 	new_state.enter()
 	current_state = new_state
-
