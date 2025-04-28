@@ -33,11 +33,28 @@ window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[global_group]
+
+ui_layer=""
+
 [gui]
 
 timers/tooltip_delay_sec=0.2
 timers/tooltip_delay_sec.editor_hint=0.2
 theme/custom="uid://de5knj4bua7mn"
+
+[input]
+
+left_mouse={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+right_mouse={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -45,6 +62,10 @@ theme/custom="uid://de5knj4bua7mn"
 2d_physics/layer_2="hero_attack"
 2d_physics/layer_3="enemy"
 2d_physics/layer_4="enemy_attack"
+2d_physics/layer_9="magic_card"
+2d_physics/layer_10="card_drop_area"
+2d_physics/layer_11="hand"
+2d_physics/layer_12="magic_card_target_selector"
 
 [rendering]
 

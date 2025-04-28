@@ -1,7 +1,7 @@
 extends Node
 
 const MAGIC_CSV_PATH = "res://global/resource/magic/magic.csv"
-const magic_resource: Script = preload("res://global/resource/magic/magic_resource.gd")
+const magic_resource: Script = preload("res://global/resource/magic/magic_card_resource.gd")
 var magic_map: Dictionary = {}
 
 func _ready():

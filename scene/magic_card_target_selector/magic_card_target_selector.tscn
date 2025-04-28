@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdeqec0k5ngqg"]
+
+[ext_resource type="Script" uid="uid://ci8m73vxo7klh" path="res://scene/magic_card_target_selector/arc.gd" id="1_2pjhe"]
+[ext_resource type="Script" uid="uid://gbpedl176kaj" path="res://scene/magic_card_target_selector/magic_card_target_selector.gd" id="1_hcsc4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yumqx"]
+size = Vector2(4, 4)
+
+[node name="MagicCardTargetSelector" type="Node2D"]
+script = ExtResource("1_hcsc4")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2048
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_yumqx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Arc" type="Line2D" parent="CanvasLayer"]
+script = ExtResource("1_2pjhe")
+metadata/_custom_type_script = "uid://ci8m73vxo7klh"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

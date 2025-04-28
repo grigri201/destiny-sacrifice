@@ -1,13 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlav1ho8km1vf"]
+[gd_scene load_steps=9 format=3 uid="uid://dlav1ho8km1vf"]
 
 [ext_resource type="Script" uid="uid://c88hjmra1vmh1" path="res://scene/strategy_scene/strategy_scene.gd" id="1_emx6c"]
 [ext_resource type="Texture2D" uid="uid://c1tsf6vgjevaf" path="res://art/texture/icon/gold.tres" id="2_ggxuu"]
 [ext_resource type="Theme" uid="uid://de5knj4bua7mn" path="res://theme/ui_font.tres" id="3_8eynj"]
+[ext_resource type="Script" uid="uid://dwy1qhxu6mhm1" path="res://scene/strategy_scene/magic_card_grid.gd" id="3_d6cc8"]
+[ext_resource type="Script" uid="uid://bwnkp50vcvj7d" path="res://scene/strategy_scene/hand.gd" id="4_bbh1p"]
+[ext_resource type="PackedScene" uid="uid://bdeqec0k5ngqg" path="res://scene/magic_card_target_selector/magic_card_target_selector.tscn" id="5_dqq8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8eynj"]
+size = Vector2(159, 216)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbh1p"]
+size = Vector2(512, 60)
 
 [node name="StrategyScene" type="Node2D"]
 script = ExtResource("1_emx6c")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CardDropArea" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardDropArea"]
+position = Vector2(79.5, 106)
+shape = SubResource("RectangleShape2D_8eynj")
+
+[node name="DeckDropArea" type="Area2D" parent="."]
+collision_layer = 1024
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeckDropArea"]
+position = Vector2(255.5, 258)
+shape = SubResource("RectangleShape2D_bbh1p")
+
+[node name="MagicCardTargetSelector" parent="." instance=ExtResource("5_dqq8i")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." groups=["ui_layer"]]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 15
@@ -54,6 +81,7 @@ theme_override_constants/margin_bottom = 8
 unique_name_in_owner = true
 layout_mode = 2
 columns = 5
+script = ExtResource("3_d6cc8")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 24)
@@ -103,10 +131,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Deck" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer2"]
+[node name="Hand" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
+script = ExtResource("4_bbh1p")
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/LevelUpButton" to="." method="_on_level_up_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/RefreshButton2" to="." method="_on_refresh_button_2_pressed"]

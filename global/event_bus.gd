@@ -1,5 +1,9 @@
 extends Node
 
+# magic card
+signal magic_card_aim_started(magic_card: MagicCard)
+signal magic_card_aim_ended(magic_card: MagicCard)
+
 # 战斗阶段
 signal battle_started
 signal battle_ended

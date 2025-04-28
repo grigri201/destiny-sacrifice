@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce3hd5nq6axit"]
+
+[ext_resource type="Script" uid="uid://ci8m73vxo7klh" path="res://scene/magic_card_target_selector/arc.gd" id="1_104f1"]
+
+[sub_resource type="Curve" id="Curve_104f1"]
+_limits = [0.2, 1.0, 0.0, 1.0]
+_data = [Vector2(0.00264551, 0.2), 0.0, 0.0, 0, 0, Vector2(0.888889, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.2), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Arc" type="Line2D"]
+width = 4.0
+width_curve = SubResource("Curve_104f1")
+script = ExtResource("1_104f1")

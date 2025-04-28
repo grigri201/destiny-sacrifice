@@ -2,7 +2,7 @@ extends Resource
 class_name TeamResource
 
 @export var gold: int = 0
-@export var magic_cards: Array[MagicResource] = []
+@export var magic_cards: Array[MagicCardResource] = []
 @export var hero_team: Array[CharacterResource] = []
 @export var level: int = 1
 

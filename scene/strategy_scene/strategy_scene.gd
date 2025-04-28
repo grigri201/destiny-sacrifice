@@ -7,7 +7,7 @@ var available_magics = []
 
 @onready var team_container: VBoxContainer = %TeamContainer
 @onready var magic_card_grid: GridContainer = %MagicCardGrid
-@onready var deck: HBoxContainer = %Deck
+@onready var hand: HBoxContainer = %Hand
 @onready var level_label: Label = %LevelLabel
 @onready var gold_label: Label = %GoldLabel
 @onready var level_up_button: Button = %LevelUpButton
@@ -74,7 +74,7 @@ func _display_magic_cards():
 		card_instance.buy_button_pressed.connect(buy_magic)
 
 # Add the new function to handle buying magic
-func buy_magic(magic_resource: MagicResource) -> void:
+func buy_magic(magic_resource: MagicCardResource) -> void:
 	# Implement logic to buy the magic here
 	# For example, check gold, add magic to player's inventory, update UI, etc.
 	print("Buying magic: ", magic_resource.name) 

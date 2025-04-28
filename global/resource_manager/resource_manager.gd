@@ -43,7 +43,7 @@ func get_random_skill() -> SkillResource:
 	return all_skills[random_skill_key]
 
 
-func get_random_magic() -> MagicResource:
+func get_random_magic() -> MagicCardResource:
 	var all_magics = MagicMap.get_all_magics()
 	if all_magics.is_empty():
 		printerr("MagicMap is empty!")
