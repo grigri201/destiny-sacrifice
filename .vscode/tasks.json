@@ -1,0 +1,45 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Fork current .tasks file",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"${workspaceFolder}/scripts/fork_task.py",
+				"${file}",
+				"${input:taskName}" // 👈 value typed in the box
+			],
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared"
+			},
+			"problemMatcher": [] // ← no scanning → no prompt
+		},
+		{
+			"label": "Render the file as prompt",
+			"type": "shell",
+			"command": "vibe",
+			"args": [
+				"ask",
+				"${relativeFile}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared"
+			},
+			"problemMatcher": [] // ← no scanning → no prompt
+		}
+	],
+	"inputs": [
+		{
+			"id": "taskName", // referenced in ${input:taskName}
+			"type": "promptString", // shows a VS Code InputBox
+			"description": "Task name (leave blank to accept default from filename)",
+			"default": "" // can’t be a variable, see note ⬇︎
+		}
+	]
+}
